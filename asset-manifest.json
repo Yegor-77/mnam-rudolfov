@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mnam-rudolfov/static/css/main.45bfa831.css",
+    "main.js": "/mnam-rudolfov/static/js/main.cc0178fd.js",
+    "index.html": "/mnam-rudolfov/index.html",
+    "main.45bfa831.css.map": "/mnam-rudolfov/static/css/main.45bfa831.css.map",
+    "main.cc0178fd.js.map": "/mnam-rudolfov/static/js/main.cc0178fd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45bfa831.css",
+    "static/js/main.cc0178fd.js"
+  ]
+}
