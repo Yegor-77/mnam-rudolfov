@@ -1,261 +1,224 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 const products = [
   {
     name: "Párek v rohlíku",
-    description: "Klasika, která nikdy nezklame.",
-    label: "NEJOBLÍBENĚJŠÍ",
+    description: "Rychlá klasika, která nikdy nezklame.",
+    price: "38 Kč",
     image:
-      "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=85",
-    alt: "Hot dog s pečivem",
+      "https://images.unsplash.com/photo-1612392061981-9d086fe894ed?auto=format&fit=crop&w=1000&q=85",
+    tag: "OBLÍBENÁ KLASIKA",
+    emoji: "🌭",
   },
   {
-    name: "Zmrzlina",
-    description: "Sladké osvěžení pro každý den.",
-    label: "NĚCO SLADKÉHO",
+    name: "Zmrzlina v kornoutu",
+    description: "Sladké osvěžení do každého dne.",
+    price: "Cena na místě",
     image:
-      "https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=900&q=85",
-    alt: "Zmrzlina",
-  },
-  {
-    name: "Párek v těstíčku",
-    description: "Křupavá dobrota na cestu.",
-    label: "NĚCO DOBRÉHO",
-    image:
-      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=85",
-    alt: "Čerstvé občerstvení",
+      "https://images.unsplash.com/photo-1629385701021-fcd568a743e8?auto=format&fit=crop&w=1000&q=85",
+    tag: "SLADKÉ OSVĚŽENÍ",
+    emoji: "🍦",
   },
 ];
 
-function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
+const mapUrl =
+  "https://www.google.com/maps/search/?api=1&query=eFtéčo+Rudolfov";
 
-  const closeMenu = () => setMenuOpen(false);
+function App() {
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div className="site">
-      <div className="topbar">
-        ✳ MALÁ ZASTÁVKA PRO VELKOU CHUŤ ✳
-      </div>
-
+    <div className={`site ${darkMode ? "dark" : "light"}`}>
       <header className="header">
-        <a className="logo" href="#domu" onClick={closeMenu}>
-          <span className="logo-icon">M<span>!</span></span>
-          <span className="logo-text">
-            MŇAM
-            <small>RUDOLFOV</small>
-          </span>
+        <a className="logo" href="#domu" aria-label="eFtéčo – domů">
+          <span className="logo-icon">eF</span>
+          <span>téčo<span className="logo-dot">.</span></span>
         </a>
 
-        <button
-          className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-        </button>
-
-        <nav className={menuOpen ? "nav nav-open" : "nav"}>
-          <a href="#nabidka" onClick={closeMenu}>Naše nabídka</a>
-          <a href="#onas" onClick={closeMenu}>O nás</a>
-          <a href="#kontakt" onClick={closeMenu}>Kde nás najdete</a>
-          <a className="nav-button" href="#nabidka" onClick={closeMenu}>
-            Na něco dobrého ↗
-          </a>
+        <nav className="nav">
+          <a href="#nabidka">Nabídka</a>
+          <a href="#nas-pribeh">O nás</a>
+          <a href="#kontakt">Kontakt</a>
         </nav>
+
+        <button
+          className="theme-toggle"
+          onClick={() => setDarkMode(!darkMode)}
+          aria-label={darkMode ? "Zapnout světlý režim" : "Zapnout tmavý režim"}
+          title={darkMode ? "Světlý režim" : "Tmavý režim"}
+        >
+          {darkMode ? "☀️" : "🌙"}
+          <span>{darkMode ? "Světlý režim" : "Tmavý režim"}</span>
+        </button>
       </header>
 
       <main>
-        <section className="hero section" id="domu">
+        <section className="hero" id="domu">
           <div className="hero-content">
             <div className="eyebrow">
-              <span>✳</span> DOBRÉ JÍDLO. DOBRÁ NÁLADA.
+              <span className="status-dot" />
+              MALÉ OBČERSTVENÍ V RUDOLFOVĚ
             </div>
 
             <h1>
-              Malá pauza.
+              Malá zastávka.
               <br />
-              <em>Velká chuť.</em>
+              <span>Velká chuť.</span>
             </h1>
 
             <p className="hero-description">
-              Dostali jste chuť na něco dobrého?
-              Zastavte se u nás v Rudolfově na párek v rohlíku
-              nebo sladkou zmrzlinu.
+              Když tě přepadne chuť na něco dobrého, stav se u nás.
+              Čeká tě rychlé občerstvení a sladké osvěžení.
             </p>
 
-            <div className="hero-buttons">
-              <a className="button button-dark" href="#nabidka">
-                Prohlédnout nabídku <span>↗</span>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#nabidka">
+                Prohlédnout nabídku <span>↘</span>
               </a>
-              <a className="simple-link" href="#kontakt">
-                Kde nás najdete ↓
+              <a
+                className="button button-secondary"
+                href={mapUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Jak se k nám dostat ↗
               </a>
             </div>
 
             <div className="hero-note">
-              <span className="smile">☺</span>
-              <p>
-                <strong>Malá radost na každý den.</strong>
-                <br />
-                Zastavte se, až půjdete kolem.
-              </p>
+              <span className="hero-note-icon">✳</span>
+              <span>Dobrá nálada je u nás v ceně.</span>
             </div>
           </div>
 
           <div className="hero-visual">
-            <div className="hero-photo">
+            <div className="hero-image-wrap">
               <img
+                className="hero-image"
                 src={products[0].image}
-                alt={products[0].alt}
+                alt="Párek v rohlíku"
               />
+              <div className="hero-image-label">
+                <span>🌭</span>
+                <div>
+                  <strong>Párek v rohlíku</strong>
+                  <small>Poctivá klasika</small>
+                </div>
+              </div>
             </div>
-            <div className="sticker">
-              <span>Dobrá</span>
-              <strong>chuť!</strong>
-              <span>✳</span>
+
+            <div className="hero-sticker">
+              <span>DOBRÁ</span>
+              <strong>CHUŤ!</strong>
+              <span>KAŽDÝ DEN</span>
             </div>
-            <div className="small-photo">
-              <img src={products[1].image} alt={products[1].alt} />
-            </div>
-            <div className="photo-caption">
-              <span /> NĚCO DOBRÉHO JE VŽDY DOBRÝ NÁPAD
-            </div>
+
+            <div className="hero-sparkle sparkle-one">✳</div>
+            <div className="hero-sparkle sparkle-two">✦</div>
           </div>
         </section>
 
-        <div className="ticker">
+        <div className="ticker" aria-label="Nabídka eFtéčo">
           <div className="ticker-track">
-            {Array.from({ length: 2 }).map((_, i) => (
-              <div className="ticker-group" key={i}>
-                <span>PÁREK V ROHLÍKU</span><b>✳</b>
-                <span>ZMRZLINA</span><b>✳</b>
-                <span>SLADKÁ PAUZA</span><b>✳</b>
-                <span>MŇAM RUDOLFOV</span><b>✳</b>
+            {[0, 1].map((copy) => (
+              <div className="ticker-group" key={copy} aria-hidden={copy === 1}>
+                <span>🌭 PÁREK V ROHLÍKU</span>
+                <span className="ticker-star">✳</span>
+                <span>🍦 ZMRZLINA V KORNOUTU</span>
+                <span className="ticker-star">✳</span>
+                <span>eFtéčo · RUDOLFOV</span>
+                <span className="ticker-star">✳</span>
               </div>
             ))}
           </div>
         </div>
 
-        <section className="menu-section section" id="nabidka">
+        <section className="section products-section" id="nabidka">
           <div className="section-heading">
             <div>
-              <div className="eyebrow"><span>✳</span> CO SI DÁTE?</div>
-              <h2>
-                Naše malé dobroty.
-                <br />
-                <em>Vaše velká radost.</em>
-              </h2>
+              <div className="section-kicker">CO SI DÁŠ?</div>
+              <h2>Naše nabídka<span>.</span></h2>
             </div>
             <p>
-              Na rychlou zastávku, na cestu nebo jen tak.
-              Vyberte si něco, na co máte právě chuť.
+              Jednoduše dobré věci, které ti zpříjemní den.
             </p>
           </div>
 
-          <div className="products">
+          <div className="products-grid">
             {products.map((product, index) => (
               <article className="product-card" key={product.name}>
-                <div className="product-image">
+                <div className="product-image-wrap">
                   <img
                     src={product.image}
-                    alt={product.alt}
+                    alt={product.name}
+                    className="product-image"
                     loading="lazy"
                   />
-                  <span className="product-label">{product.label}</span>
-                  <span className="product-number">0{index + 1}</span>
+                  <span className="product-tag">{product.tag}</span>
+                  <span className="product-number">
+                    0{index + 1}
+                  </span>
                 </div>
+
                 <div className="product-info">
-                  <h3>{product.name}</h3>
+                  <div className="product-title-row">
+                    <h3>{product.name}</h3>
+                    <span className="product-emoji">{product.emoji}</span>
+                  </div>
                   <p>{product.description}</p>
                   <div className="product-bottom">
-                    <span>Cena bude doplněna</span>
-                    <span className="round-arrow">↗</span>
+                    <span className="product-price">{product.price}</span>
+                    <span className="product-arrow">↗</span>
                   </div>
                 </div>
               </article>
             ))}
           </div>
 
-          <p className="demo-note">
-            Ukázková nabídka. Ceny a sortiment doplníme později.
+          <p className="price-note">
+            U ostatních produktů se cenu dozvíš přímo na místě.
           </p>
         </section>
 
-        <section className="about" id="onas">
-          <div className="about-image">
-            <img
-              src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1100&q=85"
-              alt="Dobré jídlo připravené k podávání"
-              loading="lazy"
-            />
-          </div>
+        <section className="about-section" id="nas-pribeh">
+          <div className="about-symbol">eF<span>✳</span></div>
           <div className="about-content">
-            <div className="eyebrow"><span>✳</span> MŇAM, TO JE ONO</div>
+            <div className="section-kicker">MÍSTO, KDE SE ZASTAVÍŠ</div>
             <h2>
-              Někdy stačí
+              Dobrá chuť
               <br />
-              jen <em>něco dobrého.</em>
+              <span>bez zbytečných řečí.</span>
             </h2>
             <p>
-              Cestou domů, po procházce nebo jen tak.
-              Dopřejte si malou pauzu a něco dobrého na zub.
+              Jsme eFtéčo v Rudolfově. Ať máš chuť na rychlou klasiku,
+              nebo na zmrzlinu v kornoutu, zastav se u nás.
             </p>
-            <a className="button button-yellow" href="#kontakt">
-              Najít nás <span>↗</span>
+            <a className="text-link" href="#kontakt">
+              Najdeš nás tady <span>→</span>
             </a>
           </div>
-          <span className="about-star">✳</span>
+          <div className="about-decoration">DOBRÉ<br />JÍDLO<br />DOBRÁ<br />NÁLADA.</div>
         </section>
 
-        <section className="visit section" id="kontakt">
-          <div className="visit-content">
-            <div className="eyebrow"><span>✳</span> ZASTAVTE SE</div>
-            <h2>
-              Najdete nás
-              <br />
-              <em>v Rudolfově.</em>
-            </h2>
+        <section className="contact-section section" id="kontakt">
+          <div className="contact-copy">
+            <div className="section-kicker">STAV SE NA NĚCO DOBRÉHO</div>
+            <h2>Tak co, dáš si?</h2>
             <p>
-              Až budete mít chuť na něco dobrého,
-              budeme se těšit na vaši návštěvu.
+              Najdeš nás v Rudolfově. Kliknutím otevřeš místo v Google Maps.
             </p>
-            <a
-              className="button button-dark"
-              href="https://www.google.com/maps/search/?api=1&query=Po%C5%A1tovn%C3%AD+29%2C+Rudolfov%2C+Czechia"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Otevřít mapu <span>↗</span>
-            </a>
           </div>
 
-          <div className="details">
-            <div className="detail">
-              <span className="detail-icon">⌖</span>
-              <div>
-                <small>ADRESA</small>
-                <strong>Poštovní 29</strong>
-                <p>Rudolfov, Jihočeský kraj</p>
-              </div>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Po%C5%A1tovn%C3%AD+29%2C+Rudolfov%2C+Czechia"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Otevřít mapu"
-              >↗</a>
-            </div>
-            <div className="detail">
-              <span className="detail-icon">◷</span>
-              <div>
-                <small>OTEVÍRACÍ DOBA</small>
-                <strong>Brzy doplníme</strong>
-                <p>Časy zatím nejsou potvrzené.</p>
-              </div>
+          <div className="contact-card">
+            <div className="contact-icon">📍</div>
+            <div className="contact-details">
+              <strong>eFtéčo</strong>
+              <span>Poštovní 29, Rudolfov</span>
+              <a href={mapUrl} target="_blank" rel="noreferrer">
+                Otevřít v Google Maps ↗
+              </a>
             </div>
           </div>
         </section>
@@ -263,18 +226,11 @@ function App() {
 
       <footer className="footer">
         <a className="logo footer-logo" href="#domu">
-          <span className="logo-icon">M<span>!</span></span>
-          <span className="logo-text">
-            MŇAM
-            <small>RUDOLFOV</small>
-          </span>
+          <span className="logo-icon">eF</span>
+          <span>téčo<span className="logo-dot">.</span></span>
         </a>
-        <p>Malá zastávka pro velkou chuť.</p>
-        <a className="back-top" href="#domu">Zpět nahoru ↑</a>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Mňam Rudolfov</span>
-          <span>Ukázkový webový projekt</span>
-        </div>
+        <span>Malé občerstvení, velká chuť.</span>
+        <a href="#domu" className="back-to-top">Zpět nahoru ↑</a>
       </footer>
     </div>
   );
